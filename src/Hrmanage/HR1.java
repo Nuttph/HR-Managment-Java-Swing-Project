@@ -50,6 +50,7 @@ public class HR1 extends JFrame {
         jButtonApply.setFont(new Font("Arial", Font.BOLD, 16));
         jButtonApply.setBackground(Color.GREEN);
         jButtonApply.setForeground(Color.WHITE);
+        jButtonApply.addActionListener(e -> openApply());
 
         // สร้าง JPanel สำหรับการจัดวางและตั้งค่าพื้นหลัง
         JPanel panel = new JPanel();
@@ -91,6 +92,10 @@ public class HR1 extends JFrame {
     private void openMenu() {
         this.setVisible(false);
         new Menu().setVisible(true);
+    }
+    private void openApply() {
+        this.setVisible(false);
+        new Apply().setVisible(true);
     }
 
     public static void main(String[] args) {
