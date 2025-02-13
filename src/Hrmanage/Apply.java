@@ -167,7 +167,9 @@ public class Apply extends JFrame {
         btnBack = new JButton("Back");
         btnBack.setBounds(350, 500, 100, 40);
         btnBack.addActionListener(e -> {
-            dispose(); // ปิดหน้าปัจจุบัน
+//            dispose(); // ปิดหน้าปัจจุบัน
+            this.setVisible(false);
+            new HR1().setVisible(true);
         });
 
         panel.add(btnBack);
