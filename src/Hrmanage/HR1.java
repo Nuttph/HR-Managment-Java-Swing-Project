@@ -20,14 +20,18 @@ public class HR1 extends JFrame {
     }
 
     private void initComponents() {
+        // ตั้งค่า Font และสีให้กับข้อความ
         JLabel jLabel1 = new JLabel("HR Management", SwingConstants.CENTER);
         jLabel1.setFont(new Font("Arial", Font.BOLD, 36));
+        jLabel1.setForeground(Color.WHITE);
 
         JLabel jLabel2 = new JLabel("Username:");
         jLabel2.setFont(new Font("Arial", Font.PLAIN, 24));
+        jLabel2.setForeground(Color.WHITE);
 
         JLabel jLabel3 = new JLabel("Password:");
         jLabel3.setFont(new Font("Arial", Font.PLAIN, 24));
+        jLabel3.setForeground(Color.WHITE);
 
         jTextField1 = new JTextField(20);
         jTextField1.setFont(new Font("Arial", Font.PLAIN, 22));
@@ -35,17 +39,24 @@ public class HR1 extends JFrame {
         jPasswordField1 = new JPasswordField(20);
         jPasswordField1.setFont(new Font("Arial", Font.PLAIN, 22));
 
+        // ตั้งค่าให้ปุ่ม Login มีสีพื้นหลัง
         jButtonLogin = new JButton("Log in");
         jButtonLogin.setFont(new Font("Arial", Font.BOLD, 22));
+        jButtonLogin.setBackground(Color.BLUE);
+        jButtonLogin.setForeground(Color.WHITE);
         jButtonLogin.addActionListener(evt -> loginAction());
 
         jButtonApply = new JButton("Apply");
         jButtonApply.setFont(new Font("Arial", Font.BOLD, 16));
-//        jButtonApply.addActionListener(evt -> openApply());
+        jButtonApply.setBackground(Color.GREEN);
+        jButtonApply.setForeground(Color.WHITE);
 
+        // สร้าง JPanel สำหรับการจัดวางและตั้งค่าพื้นหลัง
         JPanel panel = new JPanel();
         panel.setLayout(null);
+        panel.setBackground(Color.DARK_GRAY); // ตั้งค่าพื้นหลังเป็นสีเข้ม
 
+        // กำหนดตำแหน่งให้กับแต่ละคอมโพเนนต์
         jLabel1.setBounds(350, 100, 400, 50);
         jLabel2.setBounds(320, 250, 150, 30);
         jTextField1.setBounds(450, 250, 250, 40);
@@ -81,11 +92,6 @@ public class HR1 extends JFrame {
         this.setVisible(false);
         new Menu().setVisible(true);
     }
-//
-//    private void openApply() {
-//        this.setVisible(false);
-//        new Apply().setVisible(true);
-//    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new HR1().setVisible(true));
