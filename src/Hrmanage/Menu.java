@@ -38,7 +38,12 @@ public class Menu extends JFrame {
         btnApplying.setFont(buttonFont);
         btnLogout.setFont(new Font("Arial", Font.BOLD, 16));
 
-        btnLogout.addActionListener(evt -> logout());
+        // ตั้งค่าการทำงานของปุ่ม
+        btnHome.addActionListener(e -> goToMenu());
+        //btnEmployee.addActionListener(e -> openEmployee());
+        //btnFire.addActionListener(e -> openFire());
+        btnApplying.addActionListener(e -> openApplying());
+        btnLogout.addActionListener(e -> logout());
 
         lblClock = new JLabel();
         lblClock.setFont(new Font("Arial", Font.BOLD, 20));
@@ -63,7 +68,7 @@ public class Menu extends JFrame {
         btnLogout.setBounds(870, 680, 120, 30);
 
         // เพิ่ม components เข้า panel
-        panel.add(lblClock); // ✅ เพิ่มนาฬิกา
+        panel.add(lblClock);
         panel.add(titleLabel);
         panel.add(menutext);
         panel.add(btnHome);
@@ -84,8 +89,28 @@ public class Menu extends JFrame {
         timer.start();
     }
 
+    private void goToMenu() {
+        dispose(); // ปิดหน้าปัจจุบัน
+        new Menu().setVisible(true); // เปิดหน้า Menu ใหม่
+    }
+
+//    private void openEmployee() {
+  //      dispose();
+   //     new Employee().setVisible(true);
+   // }
+
+    //private void openFire() {
+      //  dispose();
+       // new Fire().setVisible(true);
+    //}
+
+    private void openApplying() {
+        dispose();
+        new Applying().setVisible(true);
+    }
+
     private void logout() {
-        this.setVisible(false);
+        dispose();
         new HR1().setVisible(true);
     }
 
