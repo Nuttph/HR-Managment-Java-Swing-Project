@@ -1,19 +1,18 @@
 package Hrmanage;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class Applying extends JFrame {
-    private JTable table;
-    private DefaultTableModel model;
+    private JTable applicantTable;
     private JButton btnBack;
+    private DefaultTableModel model;
 
     public Applying() {
-        setTitle("Applying List");
+        setTitle("Applicant List");
         setSize(1024, 768);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,57 +20,57 @@ public class Applying extends JFrame {
     }
 
     private void initComponents() {
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
 
-        // สร้างตาราง
-        String[] columnNames = {"Name", "Surname", "Role", "Salary", "Action"};
-        model = new DefaultTableModel(columnNames, 0);
-        table = new JTable(model);
-        table.setRowHeight(30);
-        JScrollPane scrollPane = new JScrollPane(table);
+        // Table Model
+        model = new DefaultTableModel();
+        model.addColumn("Name");
+        model.addColumn("Surname");
+        model.addColumn("Role");
+        model.addColumn("Salary");
+        model.addColumn("Action");
+
+        // Add applicants to table
+        updateTableData();
+
+        applicantTable = new JTable(model);
+        applicantTable.getColumn("Action").setCellRenderer(new ButtonRenderer());
+        applicantTable.getColumn("Action").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
+
+        JScrollPane scrollPane = new JScrollPane(applicantTable);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        // โหลดข้อมูลจาก Apply
-        loadEmployeeData();
-
-        // ปุ่ม Back
+        // Back button
         btnBack = new JButton("Back");
-        btnBack.addActionListener(e -> {
-            this.setVisible(false);
-            new HR1().setVisible(true);
+        btnBack.setBounds(900, 680, 100, 40);
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new Menu().setVisible(true);  // Assuming Menu is your main screen
+                setVisible(false);
+            }
         });
         panel.add(btnBack, BorderLayout.SOUTH);
 
         add(panel);
     }
 
-    private void loadEmployeeData() {
-        ArrayList<Employee> employees = Apply.getEmployeeList();
+    // Method to update table data
+    private void updateTableData() {
+        // Clear existing rows before adding new data
         model.setRowCount(0);
 
-        for (Employee emp : employees) {
-            JButton btnView = new JButton("View");
-            btnView.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(null,
-                            "Name: " + emp.name + "\n" +
-                                    "Surname: " + emp.surname + "\n" +
-                                    "Role: " + emp.role + "\n" +
-                                    "Salary: " + emp.salary + "\n" +
-                                    "Phone: " + emp.phone + "\n" +
-                                    "Email: " + emp.email + "\n" +
-                                    "Address: " + emp.address + ", " + emp.district + ", " + emp.amphur + "\n" +
-                                    "Province: " + emp.province + " " + emp.postcode + "\n" +
-                                    "Housing: " + emp.housing,
-                            "Employee Details", JOptionPane.INFORMATION_MESSAGE);
-                }
-            });
-            model.addRow(new Object[]{emp.name, emp.surname, emp.role, emp.salary, btnView});
+        // Add applicants to table
+        for (Employees emp : Employees.getApplicantList()) {
+            Object[] rowData = {
+                    emp.getName(),
+                    emp.getSurname(),
+                    emp.getRole(),
+                    emp.getSalary(),
+                    "Yes", "No"  // Assuming action is two buttons for 'Yes' or 'No'
+            };
+            model.addRow(rowData);
         }
-    }
-    public static ArrayList<Employees> getEmployeeList() {
-        return employeeList;
     }
 
     public static void main(String[] args) {

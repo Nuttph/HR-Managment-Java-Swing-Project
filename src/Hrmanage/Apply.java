@@ -1,31 +1,8 @@
 package Hrmanage;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-
-class Employees {
-    String name, surname, role, salary, phone, email;
-    String address, district, amphur, province, postcode;
-    String housing;
-
-    public Employees(String name, String surname, String role, String salary, String phone, String email,
-                    String address, String district, String amphur, String province, String postcode, String housing) {
-        this.name = name;
-        this.surname = surname;
-        this.role = role;
-        this.salary = salary;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.district = district;
-        this.amphur = amphur;
-        this.province = province;
-        this.postcode = postcode;
-        this.housing = housing;
-    }
-}
 
 public class Apply extends JFrame {
     private JTextField txtName, txtSurname, txtRole, txtSalary, txtPhone, txtEmail;
@@ -57,10 +34,10 @@ public class Apply extends JFrame {
         JLabel lblSurname = new JLabel("Surname:");
         txtSurname = new JTextField();
 
-        lblName.setBounds(190, 120, 100, 30);
-        txtName.setBounds(250, 120, 220, 30);
-        lblSurname.setBounds(480, 120, 100, 30);
-        txtSurname.setBounds(570, 120, 200, 30);
+        lblName.setBounds(190, 80, 100, 30);
+        txtName.setBounds(250, 80, 200, 30);
+        lblSurname.setBounds(480, 80, 100, 30);
+        txtSurname.setBounds(570, 80, 200, 30);
 
         panel.add(lblName);
         panel.add(txtName);
@@ -72,10 +49,10 @@ public class Apply extends JFrame {
         JLabel lblSalary = new JLabel("Salary:");
         txtSalary = new JTextField();
 
-        lblRole.setBounds(190, 170, 100, 30);
-        txtRole.setBounds(250, 170, 200, 30);
-        lblSalary.setBounds(480, 170, 100, 30);
-        txtSalary.setBounds(570, 170, 200, 30);
+        lblRole.setBounds(190, 130, 100, 30);
+        txtRole.setBounds(250, 130, 200, 30);
+        lblSalary.setBounds(480, 130, 100, 30);
+        txtSalary.setBounds(570, 130, 200, 30);
 
         panel.add(lblRole);
         panel.add(txtRole);
@@ -87,18 +64,81 @@ public class Apply extends JFrame {
         JLabel lblEmail = new JLabel("Email:");
         txtEmail = new JTextField();
 
-        lblPhone.setBounds(190, 220, 100, 30);
-        txtPhone.setBounds(250, 220, 200, 30);
-        lblEmail.setBounds(480, 220, 100, 30);
-        txtEmail.setBounds(570, 220, 200, 30);
+        lblPhone.setBounds(190, 180, 100, 30);
+        txtPhone.setBounds(250, 180, 200, 30);
+        lblEmail.setBounds(480, 180, 100, 30);
+        txtEmail.setBounds(570, 180, 200, 30);
 
         panel.add(lblPhone);
         panel.add(txtPhone);
         panel.add(lblEmail);
         panel.add(txtEmail);
 
+        JLabel lblAddress = new JLabel("Address:");
+        txtAddress = new JTextField();
+        JLabel lblDistrict = new JLabel("District:");
+        txtDistrict = new JTextField();
+
+        lblAddress.setBounds(190, 230, 100, 30);
+        txtAddress.setBounds(250, 230, 520, 30);
+        lblDistrict.setBounds(190, 280, 100, 30);
+        txtDistrict.setBounds(250, 280, 200, 30);
+
+        panel.add(lblAddress);
+        panel.add(txtAddress);
+        panel.add(lblDistrict);
+        panel.add(txtDistrict);
+
+        JLabel lblAmphur = new JLabel("Amphur:");
+        txtAmphur = new JTextField();
+        JLabel lblProvince = new JLabel("Province:");
+        txtProvince = new JTextField();
+
+        lblAmphur.setBounds(480, 280, 100, 30);
+        txtAmphur.setBounds(570, 280, 200, 30);
+        lblProvince.setBounds(190, 330, 100, 30);
+        txtProvince.setBounds(250, 330, 200, 30);
+
+        panel.add(lblAmphur);
+        panel.add(txtAmphur);
+        panel.add(lblProvince);
+        panel.add(txtProvince);
+
+        JLabel lblPostcode = new JLabel("Postcode:");
+        txtPostcode = new JTextField();
+        lblPostcode.setBounds(480, 330, 100, 30);
+        txtPostcode.setBounds(570, 330, 200, 30);
+
+        panel.add(lblPostcode);
+        panel.add(txtPostcode);
+
+        JLabel lblHousing = new JLabel("Housing:");
+        lblHousing.setBounds(190, 380, 100, 30);
+        panel.add(lblHousing);
+
+        rbParent = new JRadioButton("Parent");
+        rbOwn = new JRadioButton("Own");
+        rbRented = new JRadioButton("Rented");
+        rbHotel = new JRadioButton("Hotel");
+
+        ButtonGroup housingGroup = new ButtonGroup();
+        housingGroup.add(rbParent);
+        housingGroup.add(rbOwn);
+        housingGroup.add(rbRented);
+        housingGroup.add(rbHotel);
+
+        rbParent.setBounds(250, 380, 100, 30);
+        rbOwn.setBounds(350, 380, 100, 30);
+        rbRented.setBounds(450, 380, 100, 30);
+        rbHotel.setBounds(550, 380, 100, 30);
+
+        panel.add(rbParent);
+        panel.add(rbOwn);
+        panel.add(rbRented);
+        panel.add(rbHotel);
+
         btnApply = new JButton("Apply");
-        btnApply.setBounds(675, 300, 100, 40);
+        btnApply.setBounds(675, 450, 100, 40);
         btnApply.addActionListener(e -> saveData());
         panel.add(btnApply);
 
@@ -113,17 +153,22 @@ public class Apply extends JFrame {
         add(panel);
     }
 
+    // เมธอด saveData ที่เพิ่มผู้สมัคร
     private void saveData() {
-        String housing = rbParent.isSelected() ? "Parent" : rbOwn.isSelected() ? "Own" : rbRented.isSelected() ? "Rented" : "Hotel";
+        String housing = rbParent.isSelected() ? "Parent" :
+                rbOwn.isSelected() ? "Own" :
+                        rbRented.isSelected() ? "Rented" : "Hotel";
 
         Employees emp = new Employees(
                 txtName.getText(), txtSurname.getText(), txtRole.getText(), txtSalary.getText(),
-                txtPhone.getText(), txtEmail.getText(), "", "", "", "", "", housing
+                txtPhone.getText(), txtEmail.getText(), txtAddress.getText(), txtDistrict.getText(),
+                txtAmphur.getText(), txtProvince.getText(), txtPostcode.getText(), housing
         );
 
-        employeeList.add(emp);
+        Employees.addApplicant(emp); // เพิ่มข้อมูลลง applicantList
         JOptionPane.showMessageDialog(this, "Application Submitted!");
     }
+
 
     public static ArrayList<Employees> getEmployeeList() {
         return employeeList;
