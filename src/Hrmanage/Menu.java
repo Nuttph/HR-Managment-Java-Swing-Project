@@ -40,7 +40,7 @@ public class Menu extends JFrame {
 
         // ตั้งค่าการทำงานของปุ่ม
         btnHome.addActionListener(e -> goToMenu());
-        //btnEmployee.addActionListener(e -> openEmployee());
+        btnEmployee.addActionListener(e -> openEmployee());
         //btnFire.addActionListener(e -> openFire());
         btnApplying.addActionListener(e -> openApplying());
         btnLogout.addActionListener(e -> logout());
@@ -94,10 +94,10 @@ public class Menu extends JFrame {
         new Menu().setVisible(true); // เปิดหน้า Menu ใหม่
     }
 
-//    private void openEmployee() {
-  //      dispose();
-   //     new Employee().setVisible(true);
-   // }
+    private void openEmployee() {
+        dispose();
+        new Employee().setVisible(true);
+    }
 
     //private void openFire() {
       //  dispose();

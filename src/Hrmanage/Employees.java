@@ -6,11 +6,8 @@ public class Employees {
     protected String name, surname, role, salary, phone, email;
     protected String address, district, amphur, province, postcode, housing;
 
-    // ✅ Static List สำหรับเก็บข้อมูล
     private static ArrayList<Employees> applicantList = new ArrayList<>();
-    private static ArrayList<Employees> employeeList = new ArrayList<>();
 
-    // ✅ Constructor หลัก
     public Employees(String name, String surname, String role, String salary, String phone, String email,
                      String address, String district, String amphur, String province, String postcode, String housing) {
         this.name = name;
@@ -27,12 +24,10 @@ public class Employees {
         this.housing = housing;
     }
 
-    // ✅ Constructor แบบสั้น (ถ้าไม่มีที่อยู่)
     public Employees(String name, String surname, String role, String salary, String phone, String email) {
         this(name, surname, role, salary, phone, email, "", "", "", "", "", "");
     }
 
-    // ✅ Getter Methods
     public String getName() { return name; }
     public String getSurname() { return surname; }
     public String getRole() { return role; }
@@ -46,7 +41,6 @@ public class Employees {
     public String getPostcode() { return postcode; }
     public String getHousing() { return housing; }
 
-    // ✅ Setter Methods
     public void setName(String name) { this.name = name; }
     public void setSurname(String surname) { this.surname = surname; }
     public void setRole(String role) { this.role = role; }
@@ -60,38 +54,33 @@ public class Employees {
     public void setPostcode(String postcode) { this.postcode = postcode; }
     public void setHousing(String housing) { this.housing = housing; }
 
-    // ✅ เพิ่มข้อมูลผู้สมัคร
     public static void addApplicant(Employees emp) {
         applicantList.add(emp);
     }
 
-    // ✅ ลบข้อมูลผู้สมัคร
     public static void removeApplicant(String name, String surname) {
         applicantList.removeIf(emp -> emp.getName().equals(name) && emp.getSurname().equals(surname));
     }
 
-    // ✅ รับพนักงานเข้าทำงาน (ย้ายจาก applicantList → employeeList)
     public static void moveToEmployeeList(String name, String surname) {
+        Employees foundApplicant = null;
         for (Employees emp : applicantList) {
             if (emp.getName().equals(name) && emp.getSurname().equals(surname)) {
-                employeeList.add(emp);
-                applicantList.remove(emp);
+                foundApplicant = emp;
                 break;
             }
         }
+
+        if (foundApplicant != null) {
+            applicantList.remove(foundApplicant);
+            DB.addEmployee(foundApplicant);  // ✅ เพิ่มเข้า Database
+        }
     }
 
-    // ✅ ดึงรายชื่อผู้สมัครทั้งหมด
     public static ArrayList<Employees> getApplicantList() {
         return new ArrayList<>(applicantList);
     }
 
-    // ✅ ดึงรายชื่อพนักงานทั้งหมด
-    public static ArrayList<Employees> getEmployeeList() {
-        return new ArrayList<>(employeeList);
-    }
-
-    // ✅ แสดงข้อมูลทั้งหมด
     public String getDetails() {
         return "Name: " + name + " " + surname + "\nRole: " + role + "\nSalary: " + salary +
                 "\nPhone: " + phone + "\nEmail: " + email + "\nAddress: " + address +
