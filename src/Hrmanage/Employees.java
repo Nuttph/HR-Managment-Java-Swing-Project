@@ -1,6 +1,7 @@
 package Hrmanage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Employees {
     protected String name, surname, role, salary, phone, email;
@@ -74,6 +75,19 @@ public class Employees {
         if (foundApplicant != null) {
             applicantList.remove(foundApplicant);
             DB.addEmployee(foundApplicant);  // ✅ เพิ่มเข้า Database
+        }
+    }
+
+    // ✅ เมธอดใหม่สำหรับลบพนักงานออกจาก Database
+    public static void removeEmployee(String name, String surname) {
+        Iterator<Employees> iterator = DB.getEmployeeDatabase().iterator();
+        while (iterator.hasNext()) {
+            Employees emp = iterator.next();
+            if (emp.getName().equals(name) && emp.getSurname().equals(surname)) {
+                iterator.remove(); // ลบพนักงานออกจาก List
+                System.out.println("Removed Employee: " + name + " " + surname);
+                break;
+            }
         }
     }
 

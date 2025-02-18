@@ -34,6 +34,13 @@ public class ButtonEditor extends DefaultCellEditor {
                     // ลบผู้สมัคร
                     Employees.removeApplicant(name, surname);
                     JOptionPane.showMessageDialog(table, "Rejected: " + name + " " + surname);
+                } else if (label.equals("Fire")) {
+                    // ไล่ออกพนักงาน
+                    int confirm = JOptionPane.showConfirmDialog(table, "Are you sure you want to fire " + name + " " + surname + "?", "Confirm Fire", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        Employees.removeEmployee(name, surname); // ลบพนักงานออกจาก DB
+                        JOptionPane.showMessageDialog(table, "Fired: " + name + " " + surname);
+                    }
                 }
 
                 // ลบแถวออกจาก JTable
@@ -66,6 +73,8 @@ public class ButtonEditor extends DefaultCellEditor {
         super.fireEditingStopped();
     }
 }
+
+// ✅ Renderer สำหรับปุ่ม Fire
 class ButtonRenderer extends JButton implements TableCellRenderer {
     public ButtonRenderer() {
         setOpaque(true);
