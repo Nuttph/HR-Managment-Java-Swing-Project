@@ -21,27 +21,28 @@ public class ButtonEditor extends DefaultCellEditor {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int row = table.getSelectedRow();
-                if (button.getText().equals("Yes")) {
-                    // รับผู้สมัคร
-                    String name = (String) table.getValueAt(row, 0);
-                    String surname = (String) table.getValueAt(row, 1);
-                    // สามารถเพิ่มโค้ดเพื่อเพิ่มผู้สมัครในฐานข้อมูลหรือทำงานต่อไป
+                if (row == -1) return; // ป้องกัน error กรณีไม่มีแถวถูกเลือก
+
+                String name = (String) table.getValueAt(row, 0);
+                String surname = (String) table.getValueAt(row, 1);
+
+                if (label.equals("Yes")) {
+                    // รับผู้สมัคร -> บันทึกลงฐานข้อมูล
+                    Employees.moveToEmployeeList(name, surname);
                     JOptionPane.showMessageDialog(table, "Accepted: " + name + " " + surname);
-                    Employees.moveToEmployeeList(name, surname);  // ย้ายจาก applicantList ไปยัง employeeList
-                } else {
+                } else if (label.equals("No")) {
                     // ลบผู้สมัคร
-                    String name = (String) table.getValueAt(row, 0);
-                    String surname = (String) table.getValueAt(row, 1);
-                    // ลบจากรายชื่อผู้สมัคร
                     Employees.removeApplicant(name, surname);
                     JOptionPane.showMessageDialog(table, "Rejected: " + name + " " + surname);
                 }
-                // ลบแถวจากตาราง
+
+                // ลบแถวออกจาก JTable
                 ((DefaultTableModel) table.getModel()).removeRow(row);
             }
         });
     }
 
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         label = (value == null) ? "" : value.toString();
         button.setText(label);
@@ -49,25 +50,28 @@ public class ButtonEditor extends DefaultCellEditor {
         return button;
     }
 
+    @Override
     public Object getCellEditorValue() {
-        return new String(label);
+        return label;
     }
 
+    @Override
     public boolean stopCellEditing() {
         isPushed = false;
         return super.stopCellEditing();
     }
 
+    @Override
     protected void fireEditingStopped() {
         super.fireEditingStopped();
     }
 }
-
 class ButtonRenderer extends JButton implements TableCellRenderer {
     public ButtonRenderer() {
         setOpaque(true);
     }
 
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         setText((value == null) ? "" : value.toString());
         return this;

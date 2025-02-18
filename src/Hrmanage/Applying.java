@@ -29,14 +29,19 @@ public class Applying extends JFrame {
         model.addColumn("Surname");
         model.addColumn("Role");
         model.addColumn("Salary");
-        model.addColumn("Action");
+        model.addColumn("Accept");  // ปุ่ม Yes
+        model.addColumn("Reject");  // ปุ่ม No
 
         // Add applicants to table
         updateTableData();
 
         applicantTable = new JTable(model);
-        applicantTable.getColumn("Action").setCellRenderer(new ButtonRenderer());
-        applicantTable.getColumn("Action").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
+        applicantTable.getColumn("Accept").setCellRenderer(new ButtonRenderer());
+        applicantTable.getColumn("Accept").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
+
+        applicantTable.getColumn("Reject").setCellRenderer(new ButtonRenderer());
+        applicantTable.getColumn("Reject").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
+
 
         JScrollPane scrollPane = new JScrollPane(applicantTable);
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -57,21 +62,21 @@ public class Applying extends JFrame {
 
     // Method to update table data
     private void updateTableData() {
-        // Clear existing rows before adding new data
-        model.setRowCount(0);
+        model.setRowCount(0); // ล้างข้อมูลเก่าออกก่อน
 
-        // Add applicants to table
         for (Employees emp : Employees.getApplicantList()) {
             Object[] rowData = {
                     emp.getName(),
                     emp.getSurname(),
                     emp.getRole(),
                     emp.getSalary(),
-                    "Yes", "No"  // Assuming action is two buttons for 'Yes' or 'No'
+                    "Yes",  // ปุ่ม Accept
+                    "No"    // ปุ่ม Reject
             };
             model.addRow(rowData);
         }
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Applying().setVisible(true));
