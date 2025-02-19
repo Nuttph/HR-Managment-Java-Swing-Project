@@ -4,8 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 
 public class HR1 extends JFrame {
-    private static final String USER_ID = "Admin";
-    private static final String PASSWORD = "Admin";
+    private static final String USER_ID = "a";
+    private static final String PASSWORD = "a";
 
     private JTextField jTextField1;
     private JPasswordField jPasswordField1;

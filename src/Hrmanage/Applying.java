@@ -10,6 +10,7 @@ public class Applying extends JFrame {
     private JTable applicantTable;
     private JButton btnBack;
     private DefaultTableModel model;
+    public String B2A = "Applying";
 
     public Applying() {
         setTitle("Applicant List");
@@ -31,17 +32,20 @@ public class Applying extends JFrame {
         model.addColumn("Salary");
         model.addColumn("Accept");  // ปุ่ม Yes
         model.addColumn("Reject");  // ปุ่ม No
+        model.addColumn("Details");  // ปุ่ม View Details
 
         // Add applicants to table
         updateTableData();
 
         applicantTable = new JTable(model);
         applicantTable.getColumn("Accept").setCellRenderer(new ButtonRenderer());
-        applicantTable.getColumn("Accept").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
+        applicantTable.getColumn("Accept").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable,B2A));
 
         applicantTable.getColumn("Reject").setCellRenderer(new ButtonRenderer());
-        applicantTable.getColumn("Reject").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
+        applicantTable.getColumn("Reject").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable,B2A));
 
+        applicantTable.getColumn("Details").setCellRenderer(new ButtonRenderer());
+        applicantTable.getColumn("Details").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable,B2A));
 
         JScrollPane scrollPane = new JScrollPane(applicantTable);
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -71,12 +75,12 @@ public class Applying extends JFrame {
                     emp.getRole(),
                     emp.getSalary(),
                     "Yes",  // ปุ่ม Accept
-                    "No"    // ปุ่ม Reject
+                    "No",   // ปุ่ม Reject
+                    "View Details" // ปุ่ม Details
             };
             model.addRow(rowData);
         }
     }
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Applying().setVisible(true));

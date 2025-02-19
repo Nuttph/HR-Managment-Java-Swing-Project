@@ -6,15 +6,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class ButtonEditor extends DefaultCellEditor {
     private JButton button;
     private String label;
     private JTable table;
     private boolean isPushed;
+    private String B2somewhere;
 
-    public ButtonEditor(JCheckBox checkBox, JTable table) {
+    public ButtonEditor(JCheckBox checkBox, JTable table,String B2somewhere) {
         super(checkBox);
         this.table = table;
+        this.B2somewhere = B2somewhere;
         button = new JButton();
         button.setOpaque(true);
 
@@ -28,6 +31,8 @@ public class ButtonEditor extends DefaultCellEditor {
 
                 String name = (String) table.getValueAt(row, 0);
                 String surname = (String) table.getValueAt(row, 1);
+                String role = (String) table.getValueAt(row, 2); // คอลัมน์ตำแหน่ง
+                String salary = (String) table.getValueAt(row, 3); // คอลัมน์เงินเดือน
 
                 if (label.equals("Yes")) {
                     // รับผู้สมัคร -> บันทึกลงฐานข้อมูล
@@ -50,7 +55,20 @@ public class ButtonEditor extends DefaultCellEditor {
                         ((DefaultTableModel) table.getModel()).removeRow(row);
                         JOptionPane.showMessageDialog(table, "Fired: " + name + " " + surname);
                     }
+                } else if (label.equals("View Details")) {
+                    Employees emp = Employees.getEmployeeDetails(name, surname); // ค้นหารายละเอียดพนักงาน
+
+                    if (emp != null) {
+                        // เปิดหน้าต่างรายละเอียดพนักงาน
+                        Detail detailFrame = new Detail(emp.getName(), emp.getSurname(), emp.getRole(), emp.getSalary(),
+                                emp.getPhone(), emp.getEmail(), emp.getAddress(), emp.getDistrict(),
+                                emp.getAmphur(), emp.getProvince(), emp.getPostcode(), emp.getHousing(), "back");
+                        detailFrame.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(table, "Employee not found.");
+                    }
                 }
+
             }
         });
     }
@@ -80,7 +98,7 @@ public class ButtonEditor extends DefaultCellEditor {
     }
 }
 
-// ✅ Renderer สำหรับปุ่ม Fire
+// ✅ Renderer สำหรับปุ่ม
 class ButtonRenderer extends JButton implements TableCellRenderer {
     public ButtonRenderer() {
         setOpaque(true);

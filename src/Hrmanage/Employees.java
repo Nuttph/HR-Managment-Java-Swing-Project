@@ -95,10 +95,23 @@ public class Employees {
         return new ArrayList<>(applicantList);
     }
 
-    public String getDetails() {
-        return "Name: " + name + " " + surname + "\nRole: " + role + "\nSalary: " + salary +
-                "\nPhone: " + phone + "\nEmail: " + email + "\nAddress: " + address +
-                "\nDistrict: " + district + "\nAmphur: " + amphur + "\nProvince: " + province +
-                "\nPostcode: " + postcode + "\nHousing: " + housing;
+
+    public static Employees getEmployeeDetails(String name, String surname) {
+        // ค้นหาใน applicantList
+        for (Employees emp : applicantList) {
+            if (emp.getName().equals(name) && emp.getSurname().equals(surname)) {
+                return emp; // คืนค่าพนักงานที่ตรงกับชื่อและนามสกุล
+            }
+        }
+
+        // ถ้าไม่พบใน applicantList ให้ค้นหาใน employeeList (ถ้ามี)
+        // สมมุติว่า DB.getEmployeeDatabase() คืนค่าเป็น List<Employees>
+        for (Employees emp : DB.getEmployeeDatabase()) {
+            if (emp.getName().equals(name) && emp.getSurname().equals(surname)) {
+                return emp; // คืนค่าพนักงานที่ตรงกับชื่อและนามสกุล
+            }
+        }
+
+        return null; // คืนค่า null ถ้าไม่พบพนักงาน
     }
 }

@@ -17,8 +17,13 @@ public class DB {
     }
 
     // ลบพนักงานออกจากฐานข้อมูล
-    public static void removeEmployee(String name, String surname) {
-        employeeDatabase.removeIf(emp -> emp.getName().equals(name) && emp.getSurname().equals(surname));
-        System.out.println("Removed Employee: " + name + " " + surname);
+    public static boolean removeEmployee(String name, String surname) {
+        boolean isRemoved = employeeDatabase.removeIf(emp -> emp.getName().equals(name) && emp.getSurname().equals(surname));
+        if (isRemoved) {
+            System.out.println("Removed Employee: " + name + " " + surname);
+        } else {
+            System.out.println("Employee not found: " + name + " " + surname);
+        }
+        return isRemoved; // คืนค่า true ถ้าลบสำเร็จ, false ถ้าไม่พบพนักงาน
     }
 }

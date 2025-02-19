@@ -2,9 +2,8 @@ package Hrmanage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Employee extends JFrame {
@@ -12,6 +11,7 @@ public class Employee extends JFrame {
     private static DefaultTableModel tableModel;
     private JTextField searchField;
     private JButton searchButton, backButton;
+    private String B2E = "Employee";
 
     public Employee() {
         setTitle("Employee List");
@@ -25,27 +25,32 @@ public class Employee extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
 
         // Table Model
-        tableModel = new DefaultTableModel();
+        tableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 4; // ทำให้คอลัมน์ปุ่มเป็นแบบแก้ไขได้
+            }
+        };
         tableModel.addColumn("Name");
         tableModel.addColumn("Surname");
         tableModel.addColumn("Role");
         tableModel.addColumn("Salary");
+        tableModel.addColumn("Action"); // เพิ่มคอลัมน์ปุ่ม
 
         employeeTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(employeeTable);
         panel.add(scrollPane, BorderLayout.CENTER);
 
+        // ตั้งค่า Renderer และ Editor สำหรับปุ่ม
+        TableColumnModel columnModel = employeeTable.getColumnModel();
+        columnModel.getColumn(4).setCellRenderer(new ButtonRenderer());
+        columnModel.getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable,B2E));
+
         // Search Panel
         JPanel searchPanel = new JPanel();
         searchField = new JTextField(20);
         searchButton = new JButton("Search");
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String keyword = searchField.getText().trim();
-                loadEmployeeData(keyword);
-            }
-        });
+        searchButton.addActionListener(e -> loadEmployeeData(searchField.getText().trim()));
 
         searchPanel.add(new JLabel("Search: "));
         searchPanel.add(searchField);
@@ -54,24 +59,21 @@ public class Employee extends JFrame {
 
         // Back Button
         backButton = new JButton("Back");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Menu().setVisible(true);
-                setVisible(false);
-            }
+        backButton.addActionListener(e -> {
+            new Menu().setVisible(true);
+            setVisible(false);
         });
         panel.add(backButton, BorderLayout.SOUTH);
 
         add(panel);
-        loadEmployeeData(""); // โหลดข้อมูลทั้งหมดตอนเปิดหน้าต่าง
+        loadEmployeeData(""); // โหลดข้อมูลตอนเปิดหน้าต่าง
     }
 
-    // โหลดข้อมูลจาก Database และแสดงบน JTable
+    // โหลดข้อมูลพนักงานจาก DB
     public static void loadEmployeeData(String keyword) {
-        tableModel.setRowCount(0); // ล้างข้อมูลก่อนโหลดใหม่
-
+        tableModel.setRowCount(0); // เคลียร์ข้อมูลก่อนโหลดใหม่
         ArrayList<Employees> employeeList = DB.getEmployeeDatabase();
+
         for (Employees emp : employeeList) {
             String name = emp.getName();
             String surname = emp.getSurname();
@@ -79,14 +81,9 @@ public class Employee extends JFrame {
             String salary = emp.getSalary();
 
             if (keyword.isEmpty() || name.contains(keyword) || role.contains(keyword)) {
-                tableModel.addRow(new Object[]{name, surname, role, salary});
+                tableModel.addRow(new Object[]{name, surname, role, salary, "View Details"});
             }
         }
-    }
-
-    // ฟังก์ชันสำหรับรีเฟรชตาราง
-    public static void reloadTable() {
-        loadEmployeeData(""); // โหลดข้อมูลทั้งหมด
     }
 
     public static void main(String[] args) {
