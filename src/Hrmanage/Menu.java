@@ -49,8 +49,8 @@ public class Menu extends JFrame {
         lblClock.setFont(new Font("Arial", Font.BOLD, 20));
         lblClock.setForeground(Color.BLACK); // ตั้งค่าสีตัวหนังสือ
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/uploads/HR.jpg"));
-        Image img = icon.getImage().getScaledInstance(320, 320, Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/uploads/HR.png"));
+        Image img = icon.getImage().getScaledInstance(550, 550, Image.SCALE_SMOOTH);
         lblLogo = new JLabel(new ImageIcon(img));
 
         JPanel panel = new JPanel();
@@ -58,7 +58,7 @@ public class Menu extends JFrame {
 
         // กำหนดตำแหน่งของคอมโพเนนต์
         lblClock.setBounds(20, 680, 200, 30);
-        lblLogo.setBounds(530, 200, 280, 350);
+        lblLogo.setBounds(420, 100, 550, 550);
         titleLabel.setBounds(630, 40, 400, 50);
         menutext.setBounds(50, 140, 100, 50);
         btnHome.setBounds(50, 200, 250, 50);
