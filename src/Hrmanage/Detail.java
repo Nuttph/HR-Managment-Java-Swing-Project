@@ -36,64 +36,74 @@ public class Detail extends JFrame {
         this.source = source;
 
         setTitle("Employee Details");
-        setSize(250, 350);
+        setSize(400, 420);
         setLocationRelativeTo(null);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
     }
 
     private void initComponents() {
-        JPanel panel = new JPanel(new GridLayout(0, 2));
+        JPanel mainPanel = new JPanel(new BorderLayout());
 
-        // แสดงข้อมูลพนักงาน
-        panel.add(new JLabel("Name:"));
-        panel.add(new JLabel(name));
+        // ✅ Panel สำหรับแสดงข้อมูล (GridLayout)
+        JPanel infoPanel = new JPanel(new GridLayout(0, 2, 5, 5)); // 5px padding
+        infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // ขอบรอบๆ
 
-        panel.add(new JLabel("Surname:"));
-        panel.add(new JLabel(surname));
+        infoPanel.add(new JLabel("Name:"));
+        infoPanel.add(new JLabel(name));
 
-        panel.add(new JLabel("Role:"));
-        panel.add(new JLabel(role));
+        infoPanel.add(new JLabel("Surname:"));
+        infoPanel.add(new JLabel(surname));
 
-        panel.add(new JLabel("Salary:"));
-        panel.add(new JLabel(salary));
+        infoPanel.add(new JLabel("Role:"));
+        infoPanel.add(new JLabel(role));
 
-        panel.add(new JLabel("Phone:"));
-        panel.add(new JLabel(phone));
+        infoPanel.add(new JLabel("Salary:"));
+        infoPanel.add(new JLabel(salary));
 
-        panel.add(new JLabel("Email:"));
-        panel.add(new JLabel(email));
+        infoPanel.add(new JLabel("Phone:"));
+        infoPanel.add(new JLabel(phone));
 
-        panel.add(new JLabel("Address:"));
-        panel.add(new JLabel(address));
+        infoPanel.add(new JLabel("Email:"));
+        infoPanel.add(new JLabel(email));
 
-        panel.add(new JLabel("District:"));
-        panel.add(new JLabel(district));
+        infoPanel.add(new JLabel("Address:"));
+        infoPanel.add(new JLabel(address));
 
-        panel.add(new JLabel("Amphur:"));
-        panel.add(new JLabel(amphur));
+        infoPanel.add(new JLabel("District:"));
+        infoPanel.add(new JLabel(district));
 
-        panel.add(new JLabel("Province:"));
-        panel.add(new JLabel(province));
+        infoPanel.add(new JLabel("Amphur:"));
+        infoPanel.add(new JLabel(amphur));
 
-        panel.add(new JLabel("Postcode:"));
-        panel.add(new JLabel(postcode));
+        infoPanel.add(new JLabel("Province:"));
+        infoPanel.add(new JLabel(province));
 
-        panel.add(new JLabel("Housing:"));
-        panel.add(new JLabel(housing));
+        infoPanel.add(new JLabel("Postcode:"));
+        infoPanel.add(new JLabel(postcode));
 
-        // ปุ่มกลับ
+        infoPanel.add(new JLabel("Housing:"));
+        infoPanel.add(new JLabel(housing));
+
+        // ✅ Panel สำหรับปุ่ม Back (FlowLayout ชิดขวา)
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
             if (source.equals("Employee")) {
                 new Employee().setVisible(true);
-            }else if (source.equals("Applying")){
+            } else if (source.equals("Applying")) {
                 new Applying().setVisible(true);
             }
             dispose(); // ปิดหน้าต่าง Detail
         });
 
-        panel.add(backButton);
-        add(panel);
+        buttonPanel.add(backButton);
+
+        // ✅ เพิ่มส่วนต่างๆ ลงใน mainPanel
+        mainPanel.add(infoPanel, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        add(mainPanel);
     }
 }
