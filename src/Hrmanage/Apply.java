@@ -182,6 +182,7 @@ public class Apply extends JFrame {
                 txtAmphur.getText(), txtProvince.getText(), txtPostcode.getText(), housing
         );
 
+
         Employees.addApplicant(emp); // เพิ่มข้อมูลลง applicantList
         JOptionPane.showMessageDialog(this, "Application Submitted!");
 

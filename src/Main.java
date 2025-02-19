@@ -1,8 +1,10 @@
+import Hrmanage.Employees;
 import Hrmanage.HR1;
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+
         SwingUtilities.invokeLater(() -> new HR1().setVisible(true));
     }
 }

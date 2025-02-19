@@ -74,6 +74,7 @@ public class Employees {
 
         if (foundApplicant != null) {
             applicantList.remove(foundApplicant);
+            //nut
             DB.addEmployee(foundApplicant);  // ✅ เพิ่มเข้า Database
         }
     }
