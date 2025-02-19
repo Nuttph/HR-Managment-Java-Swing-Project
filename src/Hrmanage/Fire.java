@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Fire extends JFrame {
     private JTable employeeTable;
-    private static DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
     private JButton backButton;
 
     public Fire() {
@@ -29,7 +29,7 @@ public class Fire extends JFrame {
         tableModel.addColumn("Surname");
         tableModel.addColumn("Role");
         tableModel.addColumn("Salary");
-        tableModel.addColumn("Action"); // ปุ่ม Fire
+        tableModel.addColumn("Action");
 
         employeeTable = new JTable(tableModel);
         employeeTable.getColumn("Action").setCellRenderer(new ButtonRenderer());
@@ -50,24 +50,26 @@ public class Fire extends JFrame {
         panel.add(backButton, BorderLayout.SOUTH);
 
         add(panel);
-        loadEmployeeData(); // โหลดข้อมูลพนักงานตอนเปิดหน้าต่าง
+        loadEmployeeData();
     }
 
-    // ✅ โหลดข้อมูลจาก Database และแสดงบน JTable
-    public static void loadEmployeeData() {
-        tableModel.setRowCount(0); // ล้างข้อมูลก่อนโหลดใหม่
-
+    private void loadEmployeeData() {
+        tableModel.setRowCount(0); // Clear existing data
         ArrayList<Employees> employeeList = DB.getEmployeeDatabase();
+
         for (Employees emp : employeeList) {
-            Object[] rowData = {
-                    emp.getName(),
-                    emp.getSurname(),
-                    emp.getRole(),
-                    emp.getSalary(),
-                    "Fire"
-            };
-            tableModel.addRow(rowData);
+            tableModel.addRow(new Object[]{
+                    emp.getName(), emp.getSurname(), emp.getRole(), emp.getSalary(), "Fire"
+            });
         }
+    }
+
+    // Method to fire an employee (remove from DB)
+    public void fireEmployee(int row) {
+        String name = (String) tableModel.getValueAt(row, 0);
+        String surname = (String) tableModel.getValueAt(row, 1);
+        DB.removeEmployee(name, surname); // Remove from DB
+        loadEmployeeData(); // Refresh the employee list
     }
 
     public static void main(String[] args) {

@@ -67,23 +67,26 @@ public class Employee extends JFrame {
         loadEmployeeData(""); // โหลดข้อมูลทั้งหมดตอนเปิดหน้าต่าง
     }
 
-    // ✅ โหลดข้อมูลจาก Database และแสดงบน JTable
+    // โหลดข้อมูลจาก Database และแสดงบน JTable
     public static void loadEmployeeData(String keyword) {
         tableModel.setRowCount(0); // ล้างข้อมูลก่อนโหลดใหม่
-        keyword = keyword.toLowerCase(); // ทำให้เป็นตัวพิมพ์เล็กเพื่อให้ค้นหาง่ายขึ้น
 
         ArrayList<Employees> employeeList = DB.getEmployeeDatabase();
         for (Employees emp : employeeList) {
-            String name = emp.getName().toLowerCase();
+            String name = emp.getName();
             String surname = emp.getSurname();
-            String role = emp.getRole().toLowerCase();
+            String role = emp.getRole();
             String salary = emp.getSalary();
 
-            // ✅ ค้นหาจากทั้งชื่อ (name) และตำแหน่ง (role)
             if (keyword.isEmpty() || name.contains(keyword) || role.contains(keyword)) {
-                tableModel.addRow(new Object[]{emp.getName(), surname, emp.getRole(), salary});
+                tableModel.addRow(new Object[]{name, surname, role, salary});
             }
         }
+    }
+
+    // ฟังก์ชันสำหรับรีเฟรชตาราง
+    public static void reloadTable() {
+        loadEmployeeData(""); // โหลดข้อมูลทั้งหมด
     }
 
     public static void main(String[] args) {

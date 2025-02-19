@@ -5,20 +5,20 @@ import java.util.ArrayList;
 public class DB {
     private static ArrayList<Employees> employeeDatabase = new ArrayList<>();
 
-    // ✅ เพิ่มพนักงานเข้า Database
+    // เพิ่มพนักงาน
     public static void addEmployee(Employees emp) {
         employeeDatabase.add(emp);
         System.out.println("Employee added to DB: " + emp.getName() + " " + emp.getSurname());
     }
 
-    // ✅ คืนค่ารายชื่อพนักงานทั้งหมด
+    // ดึงข้อมูลพนักงานทั้งหมด
     public static ArrayList<Employees> getEmployeeDatabase() {
         return new ArrayList<>(employeeDatabase);
     }
 
-    // ✅ ลบพนักงานออกจาก Database
+    // ลบพนักงานออกจากฐานข้อมูล
     public static void removeEmployee(String name, String surname) {
         employeeDatabase.removeIf(emp -> emp.getName().equals(name) && emp.getSurname().equals(surname));
-        System.out.println("Removed from DB: " + name + " " + surname);
+        System.out.println("Removed Employee: " + name + " " + surname);
     }
 }
