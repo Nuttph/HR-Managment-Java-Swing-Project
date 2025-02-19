@@ -50,7 +50,7 @@ public class Menu extends JFrame {
         lblClock.setForeground(Color.BLACK); // ตั้งค่าสีตัวหนังสือ
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/uploads/HR.jpg"));
-        Image img = icon.getImage().getScaledInstance(280, 350, Image.SCALE_SMOOTH);
+        Image img = icon.getImage().getScaledInstance(320, 320, Image.SCALE_SMOOTH);
         lblLogo = new JLabel(new ImageIcon(img));
 
         JPanel panel = new JPanel();
