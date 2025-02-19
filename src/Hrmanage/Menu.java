@@ -49,7 +49,7 @@ public class Menu extends JFrame {
         lblClock.setFont(new Font("Arial", Font.BOLD, 20));
         lblClock.setForeground(Color.BLACK); // ตั้งค่าสีตัวหนังสือ
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/uploads/kim.jpg"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/uploads/HR.jpg"));
         Image img = icon.getImage().getScaledInstance(280, 350, Image.SCALE_SMOOTH);
         lblLogo = new JLabel(new ImageIcon(img));
 
