@@ -34,6 +34,8 @@ public class ButtonEditor extends DefaultCellEditor {
                 String role = (String) table.getValueAt(row, 2); // คอลัมน์ตำแหน่ง
                 String salary = (String) table.getValueAt(row, 3); // คอลัมน์เงินเดือน
 
+                fireEditingStopped();
+
                 if (label.equals("Yes")) {
                     // รับผู้สมัคร -> บันทึกลงฐานข้อมูล
                     Employees.moveToEmployeeList(name, surname);

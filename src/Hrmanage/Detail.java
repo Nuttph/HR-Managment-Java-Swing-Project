@@ -49,7 +49,6 @@ public class Detail extends JFrame {
         panel.add(new JLabel("Name:"));
         panel.add(new JLabel(name));
 
-
         panel.add(new JLabel("Surname:"));
         panel.add(new JLabel(surname));
 

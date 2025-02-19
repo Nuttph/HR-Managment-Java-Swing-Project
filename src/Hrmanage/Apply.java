@@ -153,8 +153,25 @@ public class Apply extends JFrame {
         add(panel);
     }
 
-    // เมธอด saveData ที่เพิ่มผู้สมัคร
     private void saveData() {
+        // ตรวจสอบว่ามีช่องไหนว่างหรือไม่
+        if (txtName.getText().trim().isEmpty() || txtSurname.getText().trim().isEmpty() ||
+                txtRole.getText().trim().isEmpty() || txtSalary.getText().trim().isEmpty() ||
+                txtPhone.getText().trim().isEmpty() || txtEmail.getText().trim().isEmpty() ||
+                txtAddress.getText().trim().isEmpty() || txtDistrict.getText().trim().isEmpty() ||
+                txtAmphur.getText().trim().isEmpty() || txtProvince.getText().trim().isEmpty() ||
+                txtPostcode.getText().trim().isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // ถ้ามีช่องว่างให้หยุดทำงาน
+        }
+
+        // ตรวจสอบว่ามีการเลือก Housing หรือไม่
+        if (!rbParent.isSelected() && !rbOwn.isSelected() && !rbRented.isSelected() && !rbHotel.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Please select a housing type.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         String housing = rbParent.isSelected() ? "Parent" :
                 rbOwn.isSelected() ? "Own" :
                         rbRented.isSelected() ? "Rented" : "Hotel";
@@ -167,11 +184,10 @@ public class Apply extends JFrame {
 
         Employees.addApplicant(emp); // เพิ่มข้อมูลลง applicantList
         JOptionPane.showMessageDialog(this, "Application Submitted!");
-    }
 
-
-    public static ArrayList<Employees> getEmployeeList() {
-        return employeeList;
+        // กลับไปหน้า HR1 และปิดหน้านี้
+        this.setVisible(false);
+        new HR1().setVisible(true);
     }
 
     public static void main(String[] args) {
