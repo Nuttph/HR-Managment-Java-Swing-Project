@@ -8,7 +8,7 @@ public class DB {
     // เพิ่มพนักงาน
     public static void addEmployee(Employees emp) {
         employeeDatabase.add(emp);
-        System.out.println("Employee added to DB: " + emp.getName() + " " + emp.getSurname());
+//        System.out.println("Employee added to DB: " + emp.getName() + " " + emp.getSurname());
     }
 
     // ดึงข้อมูลพนักงานทั้งหมด
