@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Employees {
+    protected int idEPY;
+
     protected String name, surname, role, salary, phone, email;
     protected String address, district, amphur, province, postcode, housing;
 
+    private static int idCounter = 1;
     private static ArrayList<Employees> applicantList = new ArrayList<>();
 
     public Employees(String name, String surname, String role, String salary, String phone, String email,
                      String address, String district, String amphur, String province, String postcode, String housing) {
+        this.idEPY = idCounter++;
         this.name = name;
         this.surname = surname;
         this.role = role;
