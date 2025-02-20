@@ -33,6 +33,7 @@ public class Employees {
         this(name, surname, role, salary, phone, email, "", "", "", "", "", "");
     }
 
+    public int getId() { return idEPY; }
     public String getName() { return name; }
     public String getSurname() { return surname; }
     public String getRole() { return role; }

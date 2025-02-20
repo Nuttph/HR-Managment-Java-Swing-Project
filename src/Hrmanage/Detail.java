@@ -17,10 +17,12 @@ public class Detail extends JFrame {
     private String postcode;
     private String housing;
     private String source;
+    private int id;
 
-    public Detail(String name, String surname, String role, String salary, String phone, String email,
+    public Detail(int id,String name, String surname, String role, String salary, String phone, String email,
                   String address, String district, String amphur, String province, String postcode,
                   String housing, String source) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.role = role;
@@ -49,6 +51,9 @@ public class Detail extends JFrame {
         // ✅ Panel สำหรับแสดงข้อมูล (GridLayout)
         JPanel infoPanel = new JPanel(new GridLayout(0, 2, 5, 5)); // 5px padding
         infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // ขอบรอบๆ
+
+        infoPanel.add(new JLabel("ID:"));
+        infoPanel.add(new JLabel(String.valueOf(id)));
 
         infoPanel.add(new JLabel("Name:"));
         infoPanel.add(new JLabel(name));

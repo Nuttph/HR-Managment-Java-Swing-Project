@@ -62,10 +62,11 @@ public class ButtonEditor extends DefaultCellEditor {
 
                     if (emp != null) {
                         // เปิดหน้าต่างรายละเอียดพนักงาน
-                        Detail detailFrame = new Detail(emp.getName(), emp.getSurname(), emp.getRole(), emp.getSalary(),
+                        Detail detailFrame = new Detail(emp.getId(),emp.getName(), emp.getSurname(), emp.getRole(), emp.getSalary(),
                                 emp.getPhone(), emp.getEmail(), emp.getAddress(), emp.getDistrict(),
                                 emp.getAmphur(), emp.getProvince(), emp.getPostcode(), emp.getHousing(), "back");
                         detailFrame.setVisible(true);
+
                     } else {
                         JOptionPane.showMessageDialog(table, "Employee not found.");
                     }
