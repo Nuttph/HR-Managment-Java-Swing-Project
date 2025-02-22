@@ -70,7 +70,16 @@ public class ButtonEditor extends DefaultCellEditor {
                     } else {
                         JOptionPane.showMessageDialog(table, "Employee not found.");
                     }
+                }else if (label.equals("Edit")) {
+                    Employees emp = Employees.getEmployeeDetails(name, surname); // ค้นหาพนักงาน
+
+                    if (emp != null) {
+                        new EditEmployeeDialog(null, emp); // เปิดหน้าต่างแก้ไขข้อมูล
+                    } else {
+                        JOptionPane.showMessageDialog(table, "Employee not found.");
+                    }
                 }
+
 
             }
         });

@@ -45,7 +45,7 @@ public class Menu extends JFrame {
         btnEmployee.addActionListener(e -> openEmployee());
         btnFire.addActionListener(e -> openFire());
         btnApplying.addActionListener(e -> openApplying());
-        //btnEdit.addActionListener(e->openEdit());
+        btnEdit.addActionListener(e->openEdit());
         btnLogout.addActionListener(e -> logout());
 
         lblClock = new JLabel();
@@ -114,10 +114,10 @@ public class Menu extends JFrame {
         new Applying().setVisible(true);
     }
 
-//    private void openEdit() {
-//        dispose();
-//        new Edit().setVisible(true);
-//    }
+    private void openEdit() {
+        dispose();
+        new Edit().setVisible(true);
+    }
 
     private void logout() {
         dispose();

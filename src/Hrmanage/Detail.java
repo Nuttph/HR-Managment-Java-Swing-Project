@@ -102,12 +102,12 @@ public class Detail extends JFrame {
             }
             dispose(); // ปิดหน้าต่าง Detail
         });
-        JButton editButton = new JButton("Edit");
-        editButton.addActionListener(e -> {
-           System.out.println("Editing Detail "+id+name+surname+role);
-        });
+//        JButton editButton = new JButton("Edit");
+//        editButton.addActionListener(e -> {
+//           System.out.println("Editing Detail "+id+name+surname+role);
+//        });
 
-        buttonPanel.add(editButton);
+//        buttonPanel.add(editButton);
         buttonPanel.add(backButton);
 
         // ✅ เพิ่มส่วนต่างๆ ลงใน mainPanel

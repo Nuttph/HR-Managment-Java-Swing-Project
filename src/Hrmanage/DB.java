@@ -8,7 +8,6 @@ public class DB {
     // เพิ่มพนักงาน
     public static void addEmployee(Employees emp) {
         employeeDatabase.add(emp);
-//        System.out.println("Employee added to DB: " + emp.getName() + " " + emp.getSurname());
     }
 
     // ดึงข้อมูลพนักงานทั้งหมด
@@ -25,5 +24,19 @@ public class DB {
             System.out.println("Employee not found: " + name + " " + surname);
         }
         return isRemoved; // คืนค่า true ถ้าลบสำเร็จ, false ถ้าไม่พบพนักงาน
+    }
+
+    // ✅ อัปเดตข้อมูลพนักงาน
+    public static boolean updateEmployee(Employees updatedEmp) {
+        for (int i = 0; i < employeeDatabase.size(); i++) {
+            Employees emp = employeeDatabase.get(i);
+            if (emp.getId() == updatedEmp.getId()) { // ตรวจสอบจาก ID
+                employeeDatabase.set(i, updatedEmp); // อัปเดตข้อมูล
+                System.out.println("Updated Employee: " + updatedEmp.getName() + " " + updatedEmp.getSurname());
+                return true; // คืนค่า true ถ้าอัปเดตสำเร็จ
+            }
+        }
+        System.out.println("Employee not found: ID " + updatedEmp.getId());
+        return false; // คืนค่า false ถ้าไม่พบพนักงาน
     }
 }
