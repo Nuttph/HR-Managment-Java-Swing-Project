@@ -29,6 +29,7 @@ public class Menu extends JFrame {
         JButton btnEmployee = new JButton("Employee");
         JButton btnFire = new JButton("Fire");
         JButton btnApplying = new JButton("Applying");
+        JButton btnEdit = new JButton("Edit");
         JButton btnLogout = new JButton("Log out");
 
         Font buttonFont = new Font("Arial", Font.BOLD, 24);
@@ -36,6 +37,7 @@ public class Menu extends JFrame {
         btnEmployee.setFont(buttonFont);
         btnFire.setFont(buttonFont);
         btnApplying.setFont(buttonFont);
+        btnEdit.setFont(buttonFont);
         btnLogout.setFont(new Font("Arial", Font.BOLD, 16));
 
         // ตั้งค่าการทำงานของปุ่ม
@@ -43,6 +45,7 @@ public class Menu extends JFrame {
         btnEmployee.addActionListener(e -> openEmployee());
         btnFire.addActionListener(e -> openFire());
         btnApplying.addActionListener(e -> openApplying());
+        //btnEdit.addActionListener(e->openEdit());
         btnLogout.addActionListener(e -> logout());
 
         lblClock = new JLabel();
@@ -65,6 +68,7 @@ public class Menu extends JFrame {
         btnEmployee.setBounds(50, 280, 250, 50);
         btnFire.setBounds(50, 360, 250, 50);
         btnApplying.setBounds(50, 440, 250, 50);
+        btnEdit.setBounds(50,520,250,50);
         btnLogout.setBounds(870, 680, 120, 30);
 
         // เพิ่ม components เข้า panel
@@ -76,6 +80,7 @@ public class Menu extends JFrame {
         panel.add(btnFire);
         panel.add(btnApplying);
         panel.add(btnLogout);
+        panel.add(btnEdit);
         panel.add(lblLogo);
 
         add(panel);
@@ -108,6 +113,11 @@ public class Menu extends JFrame {
         dispose();
         new Applying().setVisible(true);
     }
+
+//    private void openEdit() {
+//        dispose();
+//        new Edit().setVisible(true);
+//    }
 
     private void logout() {
         dispose();
