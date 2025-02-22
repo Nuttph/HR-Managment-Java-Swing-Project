@@ -37,6 +37,22 @@ public class Detail extends JFrame {
         this.housing = housing;
         this.source = source;
 
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Surname: " + surname);
+        System.out.println("Role: " + role);
+        System.out.println("Salary: " + salary);
+        System.out.println("Phone: " + phone);
+        System.out.println("Email: " + email);
+        System.out.println("Address: " + address);
+        System.out.println("District: " + district);
+        System.out.println("Amphur: " + amphur);
+        System.out.println("Province: " + province);
+        System.out.println("Postcode: " + postcode);
+        System.out.println("Housing: " + housing);
+        System.out.println("Source: " + source + "\n");
+
+
         setTitle("Employee Details");
         setSize(400, 420);
         setLocationRelativeTo(null);
