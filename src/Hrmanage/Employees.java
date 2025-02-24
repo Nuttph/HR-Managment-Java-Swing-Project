@@ -28,11 +28,7 @@ public class Employees {
         this.postcode = postcode;
         this.housing = housing;
     }
-
-    public Employees(String name, String surname, String role, String salary, String phone, String email) {
-        this(name, surname, role, salary, phone, email, "", "", "", "", "", "");
-    }
-
+    
     public int getId() { return idEPY; }
     public String getName() { return name; }
     public String getSurname() { return surname; }
@@ -84,23 +80,9 @@ public class Employees {
         }
     }
 
-    // ✅ เมธอดใหม่สำหรับลบพนักงานออกจาก Database
-    public static void removeEmployee(String name, String surname) {
-        Iterator<Employees> iterator = DB.getEmployeeDatabase().iterator();
-        while (iterator.hasNext()) {
-            Employees emp = iterator.next();
-            if (emp.getName().equals(name) && emp.getSurname().equals(surname)) {
-                iterator.remove(); // ลบพนักงานออกจาก List
-                System.out.println("Removed Employee: " + name + " " + surname);
-                break;
-            }
-        }
-    }
-
     public static ArrayList<Employees> getApplicantList() {
         return new ArrayList<>(applicantList);
     }
-
 
     public static Employees getEmployeeDetails(String name, String surname) {
         // ค้นหาใน applicantList
