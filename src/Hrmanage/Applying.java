@@ -37,7 +37,6 @@ public class Applying extends JFrame {
         model.addColumn("Details");  // ปุ่ม View Details
 
         // Add applicants to table
-        updateTableData();
 
         applicantTable = new JTable(model);
         applicantTable.getColumn("Accept").setCellRenderer(new ButtonRenderer());
@@ -78,23 +77,6 @@ public class Applying extends JFrame {
         loadEmployeeData("");
     }
 
-    // Method to update table data
-    private void updateTableData() {
-        model.setRowCount(0); // ล้างข้อมูลเก่าออกก่อน
-
-        for (Employees emp : Employees.getApplicantList()) {
-            Object[] rowData = {
-                    emp.getName(),
-                    emp.getSurname(),
-                    emp.getRole(),
-                    emp.getSalary(),
-                    "Yes",  // ปุ่ม Accept
-                    "No",   // ปุ่ม Reject
-                    "View Details" // ปุ่ม Details
-            };
-            model.addRow(rowData);
-        }
-    }
 
     private void loadEmployeeData(String keyword) {
         model.setRowCount(0); // Clear existing data
