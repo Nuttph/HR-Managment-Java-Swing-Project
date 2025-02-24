@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class Applying extends JFrame {
@@ -11,7 +12,8 @@ public class Applying extends JFrame {
     private JButton btnBack;
     private DefaultTableModel model;
     public String B2A = "Applying";
-
+    private JTextField searchField;
+    private JButton searchButton;
     public Applying() {
         setTitle("Applicant List");
         setSize(1024, 768);
@@ -50,6 +52,17 @@ public class Applying extends JFrame {
         JScrollPane scrollPane = new JScrollPane(applicantTable);
         panel.add(scrollPane, BorderLayout.CENTER);
 
+        //search
+        JPanel searchPanel = new JPanel();
+        searchField = new JTextField(20);
+        searchButton = new JButton("Search");
+        searchButton.addActionListener(e -> loadEmployeeData(searchField.getText().trim()));
+
+        searchPanel.add(new JLabel("Search: "));
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+        panel.add(searchPanel, BorderLayout.NORTH);
+
         // Back button
         btnBack = new JButton("Back");
         btnBack.setBounds(900, 680, 100, 40);
@@ -62,6 +75,7 @@ public class Applying extends JFrame {
         panel.add(btnBack, BorderLayout.SOUTH);
 
         add(panel);
+        loadEmployeeData("");
     }
 
     // Method to update table data
@@ -79,6 +93,31 @@ public class Applying extends JFrame {
                     "View Details" // ปุ่ม Details
             };
             model.addRow(rowData);
+        }
+    }
+
+    private void loadEmployeeData(String keyword) {
+        model.setRowCount(0); // Clear existing data
+        ArrayList<Employees> employeeList = DB.getEmployeeDatabase();
+
+        for (Employees emp : Employees.getApplicantList()) {
+//            tableModel.addRow(new Object[]{
+//                    emp.getName(), emp.getSurname(), emp.getRole(), emp.getSalary(), "Fire"
+//            });
+            String name = emp.getName();
+            String role = emp.getRole();
+            if (keyword.isEmpty() || name.contains(keyword) || role.contains(keyword)) {
+                Object[] rowData = {
+                        emp.getName(),
+                        emp.getSurname(),
+                        emp.getRole(),
+                        emp.getSalary(),
+                        "Yes",  // ปุ่ม Accept
+                        "No",   // ปุ่ม Reject
+                        "View Details" // ปุ่ม Details
+                };
+                model.addRow(rowData);
+            }
         }
     }
 

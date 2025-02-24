@@ -23,7 +23,6 @@ public class Employee extends JFrame {
 
     private void initComponents() {
         JPanel panel = new JPanel(new BorderLayout());
-
         // Table Model
         tableModel = new DefaultTableModel() {
             @Override
@@ -44,7 +43,7 @@ public class Employee extends JFrame {
         // ตั้งค่า Renderer และ Editor สำหรับปุ่ม
         TableColumnModel columnModel = employeeTable.getColumnModel();
         columnModel.getColumn(4).setCellRenderer(new ButtonRenderer());
-        columnModel.getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable,B2E));
+        columnModel.getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable,B2E)); // View detail
 
         // Search Panel
         JPanel searchPanel = new JPanel();

@@ -5,23 +5,6 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        Employees[] applying = {
-                new Employees("Alice", "Walker", "Manager", "55000", "0911223344", "alice.w@example.com",
-                        "321 Birch St", "Sukhumvit", "Bangkok", "Bangkok", "10120", "Yes"),
-                new Employees("Robert", "Anderson", "Developer", "42000", "0922334455", "robert.a@example.com",
-                        "654 Cedar St", "Silom", "Bangkok", "Bangkok", "10150", "No"),
-                new Employees("Sophia", "Martinez", "Designer", "39000", "0933445566", "sophia.m@example.com",
-                        "987 Willow St", "Phaya Thai", "Bangkok", "Bangkok", "10240", "Yes"),
-                new Employees("Daniel", "Lee", "HR", "36000", "0944556677", "daniel.l@example.com",
-                        "258 Cherry St", "Bang Rak", "Bangkok", "Bangkok", "10910", "No"),
-                new Employees("Olivia", "Clark", "Accountant", "43000", "0955667788", "olivia.c@example.com",
-                        "852 Spruce St", "Din Daeng", "Bangkok", "Bangkok", "10320", "Yes")
-        };
-
-        for (Employees emp : applying) {
-            Employees.addApplicant(emp);
-        }
-
         Employees[] empMockData = {
                 new Employees("John", "Doe", "Manager", "50000", "0912345678", "john.doe@example.com",
                         "123 Main St", "Downtown", "Bangkok", "Bangkok", "10100", "Yes"),
@@ -68,6 +51,23 @@ public class Main {
         for (Employees emp : empMockData) {
             DB.addEmployee(emp);
         }
+        Employees[] applying = {
+                new Employees("Alice", "Walker", "Manager", "55000", "0911223344", "alice.w@example.com",
+                        "321 Birch St", "Sukhumvit", "Bangkok", "Bangkok", "10120", "Yes"),
+                new Employees("Robert", "Anderson", "Developer", "42000", "0922334455", "robert.a@example.com",
+                        "654 Cedar St", "Silom", "Bangkok", "Bangkok", "10150", "No"),
+                new Employees("Sophia", "Martinez", "Designer", "39000", "0933445566", "sophia.m@example.com",
+                        "987 Willow St", "Phaya Thai", "Bangkok", "Bangkok", "10240", "Yes"),
+                new Employees("Daniel", "Lee", "HR", "36000", "0944556677", "daniel.l@example.com",
+                        "258 Cherry St", "Bang Rak", "Bangkok", "Bangkok", "10910", "No"),
+                new Employees("Olivia", "Clark", "Accountant", "43000", "0955667788", "olivia.c@example.com",
+                        "852 Spruce St", "Din Daeng", "Bangkok", "Bangkok", "10320", "Yes")
+        };
+
+        for (Employees emp : applying) {
+            Employees.addApplicant(emp);
+        }
+
         SwingUtilities.invokeLater(() -> new HR1().setVisible(true));
     }
 }

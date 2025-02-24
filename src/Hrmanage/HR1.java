@@ -12,10 +12,6 @@ public class HR1 extends JFrame {
     private JButton jButtonLogin, jButtonApply;
 
     public HR1() {
-
-
-
-
         setTitle("HR Login");
         setSize(1024, 768);
         setLocationRelativeTo(null); // จัดให้อยู่กึ่งกลางจอ
