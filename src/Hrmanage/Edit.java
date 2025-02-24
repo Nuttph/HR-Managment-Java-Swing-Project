@@ -67,7 +67,7 @@ public class Edit extends JFrame {
             String role = emp.getRole();
             if (keyword.isEmpty() || name.contains(keyword) || role.contains(keyword)) {
                 tableModel.addRow(new Object[]{
-                        emp.getName(), emp.getSurname(), emp.getRole(), emp.getSalary(), "Fire"
+                        emp.getName(), emp.getSurname(), emp.getRole(), emp.getSalary(), "Edit"
                 });
             }}
     }
