@@ -14,7 +14,7 @@ public class Edit extends JFrame {
     private JButton searchButton;
     public Edit() {
         setTitle("Edit Employees");
-        setSize(800, 600);
+        setSize(1024, 768);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -58,7 +58,7 @@ public class Edit extends JFrame {
         editColumn.setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable, "Update"));
     }
 
-    private void loadEmployeeData(String keyword) {
+    protected void loadEmployeeData(String keyword) {
         tableModel.setRowCount(0);
         ArrayList<Employees> employeeList = DB.getEmployeeDatabase();
 

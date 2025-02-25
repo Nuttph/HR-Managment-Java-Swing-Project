@@ -71,10 +71,15 @@ public class ButtonEditor extends DefaultCellEditor {
                         JOptionPane.showMessageDialog(table, "Employee not found.");
                     }
                 }else if (label.equals("Edit")) {
-                    Employees emp = Employees.getEmployeeDetails(name, surname); // ค้นหาพนักงาน
+                    Employees emp = Employees.getEmployeeDetails(name, surname);
 
                     if (emp != null) {
-                        new EditEmployeeDialog(null, emp); // เปิดหน้าต่างแก้ไขข้อมูล
+                        EditEmployeeDialog dialog = new EditEmployeeDialog(null, emp);
+                        dialog.setVisible(true);
+
+                        // รีเฟรชตารางหลังจากปิด dialog
+                        ((DefaultTableModel) table.getModel()).setRowCount(0);
+                        ((Edit) SwingUtilities.getWindowAncestor(table)).loadEmployeeData("");
                     } else {
                         JOptionPane.showMessageDialog(table, "Employee not found.");
                     }
