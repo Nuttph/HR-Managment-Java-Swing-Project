@@ -90,6 +90,12 @@ public class ButtonEditor extends DefaultCellEditor {
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        System.out.println("getTableCellRendererComponent");
+        System.out.println(table);
+        System.out.println(value.toString());
+        System.out.println(isSelected);
+        System.out.println(row);
+        System.out.println(column);
         label = (value == null) ? "" : value.toString();
         button.setText(label);
         isPushed = true;
@@ -116,11 +122,19 @@ public class ButtonEditor extends DefaultCellEditor {
 // ✅ Renderer สำหรับปุ่ม
 class ButtonRenderer extends JButton implements TableCellRenderer {
     public ButtonRenderer() {
+//        System.out.println("Opaque True");
         setOpaque(true);
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+//        System.out.println("getTableCellRendererComponent");
+//        System.out.println(table);
+//        System.out.println(value);
+//        System.out.println(isSelected);
+//        System.out.println(hasFocus);
+//        System.out.println(row);
+//        System.out.println(column);
         setText((value == null) ? "" : value.toString());
         return this;
     }
