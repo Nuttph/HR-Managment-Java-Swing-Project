@@ -11,7 +11,6 @@ public class Applying extends JFrame {
     private JTable applicantTable;
     private JButton btnBack;
     private DefaultTableModel model;
-    public String B2A = "Applying";
     private JTextField searchField;
     private JButton searchButton;
     public Applying() {
@@ -40,13 +39,13 @@ public class Applying extends JFrame {
 
         applicantTable = new JTable(model);
         applicantTable.getColumn("Accept").setCellRenderer(new ButtonRenderer());
-        applicantTable.getColumn("Accept").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable,B2A));
+        applicantTable.getColumn("Accept").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
 
         applicantTable.getColumn("Reject").setCellRenderer(new ButtonRenderer());
-        applicantTable.getColumn("Reject").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable,B2A));
+        applicantTable.getColumn("Reject").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
 
         applicantTable.getColumn("Details").setCellRenderer(new ButtonRenderer());
-        applicantTable.getColumn("Details").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable,B2A));
+        applicantTable.getColumn("Details").setCellEditor(new ButtonEditor(new JCheckBox(), applicantTable));
 
         JScrollPane scrollPane = new JScrollPane(applicantTable);
         panel.add(scrollPane, BorderLayout.CENTER);

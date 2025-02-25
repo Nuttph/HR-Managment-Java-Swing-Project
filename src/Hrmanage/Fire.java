@@ -35,7 +35,7 @@ public class Fire extends JFrame {
 
         employeeTable = new JTable(tableModel);
         employeeTable.getColumn("Action").setCellRenderer(new ButtonRenderer());
-        employeeTable.getColumn("Action").setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable," "));
+        employeeTable.getColumn("Action").setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable));
 
         JScrollPane scrollPane = new JScrollPane(employeeTable);
         panel.add(scrollPane, BorderLayout.CENTER);
