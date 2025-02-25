@@ -84,14 +84,7 @@ public class Fire extends JFrame {
             }
         }
     }
-
-    // Method to fire an employee (remove from DB)
-    public void fireEmployee(int row) {
-        String name = (String) tableModel.getValueAt(row, 0);
-        String surname = (String) tableModel.getValueAt(row, 1);
-        DB.removeEmployee(name, surname); // Remove from DB
-        loadEmployeeData(""); // Refresh the employee list
-    }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Fire().setVisible(true));
