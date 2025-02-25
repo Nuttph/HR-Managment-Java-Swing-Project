@@ -55,7 +55,7 @@ public class Edit extends JFrame {
         // กำหนดให้คอลัมน์ "Edit" ใช้ Renderer และ Editor
         TableColumn editColumn = employeeTable.getColumnModel().getColumn(4);
         editColumn.setCellRenderer(new ButtonRenderer());
-        editColumn.setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable, "Update"));
+        editColumn.setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable));
     }
 
     protected void loadEmployeeData(String keyword) {

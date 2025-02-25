@@ -11,7 +11,6 @@ public class Employee extends JFrame {
     private static DefaultTableModel tableModel;
     private JTextField searchField;
     private JButton searchButton, backButton;
-    private String B2E = "Employee";
 
     public Employee() {
         setTitle("Employee List");
@@ -43,7 +42,7 @@ public class Employee extends JFrame {
         // ตั้งค่า Renderer และ Editor สำหรับปุ่ม
         TableColumnModel columnModel = employeeTable.getColumnModel();
         columnModel.getColumn(4).setCellRenderer(new ButtonRenderer());
-        columnModel.getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable,B2E)); // View detail
+        columnModel.getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox(), employeeTable)); // View detail
 
         // Search Panel
         JPanel searchPanel = new JPanel();

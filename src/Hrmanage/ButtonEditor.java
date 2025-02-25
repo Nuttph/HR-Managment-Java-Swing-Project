@@ -12,12 +12,10 @@ public class ButtonEditor extends DefaultCellEditor {
     private String label;
     private JTable table;
     private boolean isPushed;
-    private String B2somewhere;
 
-    public ButtonEditor(JCheckBox checkBox, JTable table,String B2somewhere) {
+    public ButtonEditor(JCheckBox checkBox, JTable table) {
         super(checkBox);
         this.table = table;
-        this.B2somewhere = B2somewhere;
         button = new JButton();
         button.setOpaque(true);
 
